@@ -3,7 +3,8 @@ from models.container import ContainerViewModel
 class Container:
     def __init__(self, client):
         self.client = client
-
+    
+    ## listing all container details
     def all(self):
         container_list = []
         containers = self.client.containers.list()

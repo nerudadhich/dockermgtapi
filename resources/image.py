@@ -4,6 +4,7 @@ class Image:
     def __init__(self, client):
         self.client = client
 
+    ## listing all images details
     def all(self):
         image_list = []
         images = self.client.images.list()

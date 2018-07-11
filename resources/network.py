@@ -4,6 +4,7 @@ class Network:
     def __init__(self, client):
         self.client = client
 
+    ## listing all network details
     def all(self):
         network_list = []
         networks = self.client.networks.list()

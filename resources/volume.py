@@ -4,6 +4,7 @@ class Volume:
     def __init__(self, client):
         self.client = client
 
+    ## listing all volume details
     def all(self):
         volume_list = []
         volumes = self.client.volumes.list()

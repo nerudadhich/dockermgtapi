@@ -22,6 +22,7 @@ def get_containers():
         container_list = container.all()
         return jsonify(container_list)
     except Exception as e:
+        app.logger.error('Error while container list %s', str(e))
         return jsonify({"error": str(e)}), 500
         
 @app.route('/image/list')
@@ -31,6 +32,7 @@ def get_images():
         image_list = image.all()
         return jsonify(image_list)
     except Exception as e:
+        app.logger.error('Error while image list %s', str(e))
         return jsonify({"error": str(e)}), 500
 
 @app.route('/network/list')
@@ -40,6 +42,7 @@ def get_networks():
         network_list = network.all()
         return jsonify(network_list)
     except Exception as e:
+        app.logger.error('Error while network list %s', str(e))
         return jsonify({"error": str(e)}), 500
 
 @app.route('/volume/list')
@@ -49,4 +52,5 @@ def get_volumes():
         volume_list = volume.all()
         return jsonify(volume_list)
     except Exception as e:
+        app.logger.error('Error while volume list %s', str(e))
         return jsonify({"error": str(e)}), 500

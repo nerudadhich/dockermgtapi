@@ -37,4 +37,12 @@ API Details
     GET /image/list
     GET /network/list
     GET /volume/list
+
+Code Coverage Details
+---------------------
+
+.. code-block:: text
+
+    coverage run -m pytest
+    coverage report resources/*.py
     

@@ -7,10 +7,13 @@ from resources.volume import Volume
 from resources.network import Network
 from resources.image import Image
 
-
+## connection to docker
+## Note: Need to improve
 client = docker.from_env()
+#client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+#client = docker.DockerClient(base_url='tcp://127.0.0.1:1234')
+
 app = Flask(__name__)
-app.run(debug=True)
 
 @app.route('/container/list')
 def get_containers():

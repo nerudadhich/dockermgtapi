@@ -9,7 +9,9 @@ Installing
 Configuration of Docker used by this app
 
     client = docker.from_env()   => (active)
+
     client = docker.DockerClient(base_url='unix://var/run/docker.sock') => (can active by uncommenting the line in app.py)
+    
     client = docker.DockerClient(base_url='tcp://127.0.0.1:1234') => (can active by uncommenting the line in app.py)
 
 Python3 is prerequisite

@@ -1,46 +1,49 @@
 from flask import Flask
 from flask import jsonify
-
 import docker
-import json
+
+from resources.container import Container
+from resources.volume import Volume
+from resources.network import Network
+from resources.image import Image
+
 
 client = docker.from_env()
-
 app = Flask(__name__)
 app.run(debug=True)
 
 @app.route('/container/list')
 def get_containers():
-    container_list = []
-    containers = client.containers.list()
-    for container in containers:
-        #print(container.stats(stream=False))
-        app.logger.info('This is logger container stats %s', container.stats(stream=False))
-        container_list.append({"name":container.name, "status": container.status, "id": container.id})
-    return jsonify(container_list)
-
+    try:
+        container = Container(client)
+        container_list = container.all()
+        return jsonify(container_list)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+        
 @app.route('/image/list')
 def get_images():
-    image_list = []
-    images = client.images.list()
-    for image in images:
-        image_list.append({"id":image.id, "labels": image.labels})
-    return jsonify(image_list)
+    try:
+        image = Image(client)
+        image_list = image.all()
+        return jsonify(image_list)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/network/list')
 def get_networks():
-    networks_list = []
-    networks = client.networks.list()
-    for network in networks:
-        networks_list.append({"id":network.id, "name": network.name})
-    return jsonify(networks_list)
+    try:
+        network = Network(client)
+        network_list = network.all()
+        return jsonify(network_list)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/volume/list')
 def get_volumes():
-    volume_list = []
-    volumes = client.volumes.list()
-    for volume in volumes:
-        volume_list.append({"id":volume.id, "name": volume.name})
-    return jsonify(volume_list)
-
-    
+    try:
+        volume = Volume(client)
+        volume_list = volume.all()
+        return jsonify(volume_list)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
